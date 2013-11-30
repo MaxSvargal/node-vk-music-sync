@@ -1,0 +1,6 @@
+{
+  "email": "youremail@example.com",
+  "passw": "yourpassword",
+  "dlThreads": 4,
+  "dlPath": "#{__dirname}/cache"
+}

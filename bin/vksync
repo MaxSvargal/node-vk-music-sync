@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+require("coffee-script");
+var vksync = require('../main'),
+    args = process.argv.slice(2);
+
+vksync.initialize(args);

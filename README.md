@@ -4,7 +4,7 @@ node-vk-music-sync
 Sync your music from vk.com to your computer.
 
 ## How to install
-1. You need to install [PhantomJS](http://phantomjs.org/)
+1. You need to install [NodeJS](http://nodejs.org/) and [PhantomJS](http://phantomjs.org/)
 
 2. Install npm module globally
   ```sh

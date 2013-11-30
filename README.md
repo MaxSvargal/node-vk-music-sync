@@ -10,9 +10,7 @@ Sync your music from vk.com to your computer.
   ```sh
   npm install -g node-vk-music-sync
   ```
-3. You need to fill email/telephone and password in users/main.json or create new config for support multiple accounts.
-  
-  And as you can change maximum download threads.
+3. You need to fill email/telephone and password in users/main.json or create new config for support multiple accounts. And as you can change maximum download threads and directory for downloads
   ```json
   {
     "email": "youremail@example.com",

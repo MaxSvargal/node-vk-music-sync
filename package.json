@@ -2,7 +2,6 @@
   "name": "node-vk-music-sync",
   "version": "0.1.0",
   "description": "Sync your music from vk.com to your computer.",
-  "homepage": "http://maxsvargal.com",
   "keywords": [
     "vk",
     "music",
@@ -15,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MaxSvargal"
+    "url": "https://github.com/MaxSvargal/node-vk-music-sync"
   },
   "license": "MIT",
   "bin": {
-    "otagai": "./bin/vksync"
+    "vksync": "./bin/vksync"
   },
   "engines": {
     "node": "0.10.x",

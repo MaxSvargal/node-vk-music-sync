@@ -1,13 +1,22 @@
+fs = require 'fs'
+
 exports.initialize = (args) ->
   configName = if args.length isnt 0 then args[0] else 'main'
-  params = require "#{__dirname}/users/#{configName}.json"
-  params.appID = '4027411'
-  params.appSecret = 'MDn6yOgRLmkWBbm1PTFL'
+  configPath = "#{__dirname}/users/#{configName}.json"
+  fs.exists configPath, (exists) ->
+    if not exists 
+      console.log "Config #{configName} doesn't exists."
+      return
 
-  vkAuth = require('./lib/vkAuth')(params)
-  musicParser = require('./lib/musicParser')(params)
+    params = require configPath
+    params.appID = '4027411'
+    params.appSecret = 'MDn6yOgRLmkWBbm1PTFL'
+    params.dlPath = if params.dlPath is null then "#{__dirname}/cache" else params.dlPath
 
-  vkAuth.initialize (token) ->
-    if token is null then throw "Can't authorize on vk.com server. Aborted."
-    musicParser.getCollectionFromServer token, (music) ->
-      musicParser.downloadCollection()
+    vkAuth = require('./lib/vkAuth')(params)
+    musicParser = require('./lib/musicParser')(params)
+
+    vkAuth.initialize (token) ->
+      if token is null then throw "Can't authorize on vk.com server. Aborted."
+      musicParser.getCollectionFromServer token, (music) ->
+        musicParser.downloadCollection()

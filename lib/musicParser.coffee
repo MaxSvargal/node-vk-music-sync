@@ -15,14 +15,18 @@ module.exports = (params) ->
       callback()
 
   getCachedCollection = (callback) ->
-    fs.readFile cacheJsonPath, (err, data) ->
+    fs.readFile cacheJsonPath, 'utf8', (err, data) ->
       musicJson = (JSON.parse data).response
       callback musicJson
 
   downloadTrack = (data, callback) ->
     filename = "#{data.artist} - #{data.title}.mp3"
     console.log "Start download track".grey, filename.magenta
+    try
     file = fs.createWriteStream "#{params.dlPath}/#{filename}"
+    file.on 'error', (e) ->
+      console.log "Error write file '#{filename}'. Aborted.".red.bold
+
     req = http.get data.url, (response) ->
       response.pipe file
 
@@ -33,8 +37,10 @@ module.exports = (params) ->
         console.log filename.bold, " downloaded.".green
         callback()
 
-    # Offline test mode  
-    #setTimeout (-> callback filename), Math.floor(Math.random() * 4000)
+  checkOnExists = (data, callback) ->
+    filename = "#{data.artist} - #{data.title}.mp3"
+    fs.exists "#{params.dlPath}/#{filename}", (exists) ->
+      callback exists
 
   return {
     downloadCollection: ->
@@ -47,8 +53,13 @@ module.exports = (params) ->
             track.title = track.title.replace '/', ''
             track.artist = track.artist.replace /\s{2,}/g, ' '
             track.title = track.title.replace /\s{2,}/g, ' '
-            downloadTrack track, ->
-              loopFn()
+            checkOnExists track, (exists) ->
+              if exists
+                console.log "#{track.artist} - #{track.title}.mp3" + ' already exists.'.yellow
+                loopFn()
+              else
+                downloadTrack track, -> loopFn()
+
           for [0..params.dlThreads-1]
             loopFn()
         else

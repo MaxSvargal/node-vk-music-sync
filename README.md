@@ -4,13 +4,13 @@ node-vk-music-sync
 Sync your music from vk.com to your computer.
 
 ## How to install
-1. You need to install [NodeJS](http://nodejs.org/) and [PhantomJS](http://phantomjs.org/)
+1. You need to install [NodeJS](http://nodejs.org/) and [PhantomJS](http://phantomjs.org/) (for easiest authorization)
 
 2. Install npm module globally
   ```sh
   npm install -g node-vk-music-sync
   ```
-3. You need to fill email/telephone and password in users/main.json or create new config for support multiple accounts. And as you can change maximum download threads and directory for downloads
+3. You need to fill email/telephone and password in */usr/local/lib/npm_modules/node-vk-music-sync/profiles/main.json* or create new config for support multiple accounts. And as you can change maximum download threads and directory for download (by default in current folder).
   ```json
   {
     "email": "youremail@example.com",

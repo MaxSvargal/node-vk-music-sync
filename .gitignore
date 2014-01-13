@@ -13,3 +13,4 @@ users/dev.json
 cache.json
 *.swp
 .DS_Store
+.idea

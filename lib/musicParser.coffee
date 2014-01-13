@@ -22,7 +22,7 @@ module.exports = (params) ->
   downloadTrack = (data, callback) ->
     filename = "#{data.artist} - #{data.title}.mp3"
     console.log "Start download track".grey, filename.magenta
-    try
+
     file = fs.createWriteStream "#{params.dlPath}/#{filename}"
     file.on 'error', (e) ->
       console.log "Error write file '#{filename}'. Aborted.".red.bold
@@ -51,6 +51,8 @@ module.exports = (params) ->
             track = musicJson[collectionPosition++]
             track.artist = track.artist.replace '/', ''
             track.title = track.title.replace '/', ''
+            track.artist = track.artist.replace '[', ''
+            track.title = track.title.replace ']', ''
             track.artist = track.artist.replace /\s{2,}/g, ' '
             track.title = track.title.replace /\s{2,}/g, ' '
             checkOnExists track, (exists) ->

@@ -11,7 +11,7 @@ exports.initialize = (args) ->
     params = require configPath
     params.appID = '4027411'
     params.appSecret = 'MDn6yOgRLmkWBbm1PTFL'
-    params.dlPath = if isnt params.dlPath then process.cwd() else params.dlPath
+    params.dlPath = if not params.dlPath then process.cwd() else params.dlPath
 
     vkAuth = require('./lib/vkAuth')(params)
     musicParser = require('./lib/musicParser')(params)
